@@ -1,17 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import * as petService from '../../services/petService';
 
 const Details = () => {
+    let [pet, setPet] = useState({});
+    let { petId } = useParams();
+
+    useEffect(() => {
+        petService.getOne(petId)
+        .then(result => {
+            setPet(result);
+        })
+    }, []);
+
     return (
         <section id="details-page" class="details">
             <div class="pet-information">
-                <h3>Name: Milo</h3>
-                <p class="type">Type: dog</p>
-                <p class="img"><img src="/images/dog.png" /></p>
+                <h3>Name: {pet.name}</h3>
+                <p class="type">Type: {pet.type}</p>
+                <p class="img"><img src={pet.imageUrl} /></p>
                 <div class="actions">
-                    <Link class="button" href="#">Edit</Link>
-                    <Link class="button" href="#">Delete</Link>
+                    <Link class="button" to='#'>Edit</Link>
+                    <Link class="button" to='#'>Delete</Link>
 
-                    <Link class="button" href="#">Like</Link>
+                    <Link class="button" to='#'>Like</Link>
 
                     <div class="likes">
                         <img class="hearts" src="/images/heart.png" />
@@ -21,11 +33,7 @@ const Details = () => {
             </div>
             <div class="pet-description">
                 <h3>Description:</h3>
-                <p>Today, some dogs are used as pets, others are used to help humans do their work. They are a popular
-                    pet because they are usually playful, friendly, loyal and listen to humans. Thirty million dogs in
-                    the United States are registered as pets.[5] Dogs eat both meat and vegetables, often mixed together
-                    and sold in stores as dog food. Dogs often have jobs, including as police dogs, army dogs,
-                    assistance dogs, fire dogs, messenger dogs, hunting dogs, herding dogs, or rescue dogs.</p>
+                <p>{pet.description}</p>
             </div>
         </section>
     );

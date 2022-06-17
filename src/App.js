@@ -35,9 +35,9 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/details/:id' element={<Details />} />
+          <Route path='/details/:petId' element={<Details />} />
           <Route path='/create' element={<Create />} />
-          <Route path='/edit/:id' element={<Edit />} />
+          <Route path='/edit/:petId' element={<Edit />} />
           <Route path='/my-pet/:userId' element={<MyPet />} />
         </Routes>
       </main>
