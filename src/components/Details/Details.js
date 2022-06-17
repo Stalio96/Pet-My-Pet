@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Details = () => {
     return (
         <section id="details-page" class="details">
@@ -6,10 +8,10 @@ const Details = () => {
                 <p class="type">Type: dog</p>
                 <p class="img"><img src="/images/dog.png" /></p>
                 <div class="actions">
-                    <a class="button" href="#">Edit</a>
-                    <a class="button" href="#">Delete</a>
+                    <Link class="button" href="#">Edit</Link>
+                    <Link class="button" href="#">Delete</Link>
 
-                    <a class="button" href="#">Like</a>
+                    <Link class="button" href="#">Like</Link>
 
                     <div class="likes">
                         <img class="hearts" src="/images/heart.png" />
