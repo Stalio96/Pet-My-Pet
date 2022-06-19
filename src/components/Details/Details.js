@@ -20,8 +20,8 @@ const Details = () => {
                 <p class="type">Type: {pet.type}</p>
                 <p class="img"><img src={pet.imageUrl} /></p>
                 <div class="actions">
-                    <Link class="button" to='#'>Edit</Link>
-                    <Link class="button" to='#'>Delete</Link>
+                    <Link class="button" to={`/edit/${pet._id}`}>Edit</Link>
+                    <Link class="button" to={`/delete/${pet._id}`}>Delete</Link>
 
                     <Link class="button" to='#'>Like</Link>
 
