@@ -12,6 +12,7 @@ import Edit from './components/Edit/Edit';
 import Login from './components/Login/Login';
 import MyPet from './components/MyPet/MyPet';
 import Register from './components/Register/Register';
+import Logout from './components/Logout/Logout';
 
 function App() {
 
@@ -19,13 +20,12 @@ function App() {
 
   useEffect(() => {
     let user = authService.getUser();
-    console.log(user)
 
     setUserInfo({
       isAuthenticated: Boolean(user),
       user
     })
-  },[])
+  }, [])
 
   const onLogin = (email) => {
     setUserInfo({
@@ -49,6 +49,7 @@ function App() {
         <Routes>
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/login' element={<Login onLogin={onLogin} />} />
+          <Route path='/logout' element={<Logout onLogout={onLogout} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/details/:petId' element={<Details />} />
           <Route path='/create' element={<Create />} />

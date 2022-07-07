@@ -10,10 +10,18 @@ export async function login(email, password) {
     });
 
     let result = await response.json();
+    
+    if(response.ok){
+        localStorage.setItem('user', email);
+    
+        return result;
+    }
 
-    localStorage.setItem('user', email);
+    throw response.js
+}
 
-    return result;
+export async function logout() {
+    localStorage.removeItem('user');
 }
 
 export async function register(email, password) {
