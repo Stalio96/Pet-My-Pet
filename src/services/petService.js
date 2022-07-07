@@ -8,11 +8,12 @@ export async function getAll() {
     return result;
 }
 
-export async function create(petData) {
+export async function create(petData, token) {
     let response = await fetch(`${baseUrl}/data/pets`, {
         method: 'post',
         headers: {
         'content-type': 'application/json',
+        'X-Authorization': token
         },
         body: JSON.stringify(petData)
     });

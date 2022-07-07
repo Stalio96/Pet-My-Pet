@@ -21,7 +21,7 @@ export async function login(email, password) {
 }
 
 export async function logout() {
-    localStorage.removeItem('user');
+    const respone = await fetch(`${baseUrl}/users/logout`);
 }
 
 export async function register(email, password) {

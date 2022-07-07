@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
-const Header = ({
-    email
-}) => {
+import { AuthContext } from '../../contexts/AuthContext';
+
+const Header = () => {
+    const { user } = useContext(AuthContext);
+
     return (
         <header id="site-header">
             <nav className="navbar">
                 <section className="navbar-dashboard">
                     <Link to={'/dashboard'}>Dashboard</Link>
-                    {email
+                    {user.email
                         ? <div id="user">
-                            <span>Welcome, {email}</span>
+                            <span>Welcome, {user.email}</span>
                             <Link className="button" to={'/my-pet'}>My Pets</Link>
                             <Link className="button" to={'/create'}>Add Pet</Link>
                             <Link className="button" to={'/logout'}>Logout</Link>

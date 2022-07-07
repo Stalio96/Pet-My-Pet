@@ -1,7 +1,12 @@
-import * as petService from '../../services/petService';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+
+import { AuthContext } from '../../contexts/AuthContext';
+
+import * as petService from '../../services/petService';
 
 const Create = () => {
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
     function onPetCreate(e) {
@@ -18,10 +23,10 @@ const Create = () => {
             description,
             imageUrl,
             type
-        })
-        .then (result => {
-            navigate('/dashboard');
-        })
+        }, user.accessToken)
+            .then(result => {
+                navigate('/dashboard');
+            })
     }
     return (
         <section id="create-page" className="create">
