@@ -1,22 +1,49 @@
-const Login = () => {
+import { useNavigate } from "react-router-dom";
+import * as authService from "../../services/authService";
+
+
+const Login = ({
+    onLogin
+}) => {
+    const navigate = useNavigate();
+
+    const onLoginHandler = (e) => {
+        e.preventDefault();
+
+        let formData = new FormData(e.currentTarget);
+
+        let email = formData.get('email');
+        let password = formData.get('password');
+
+        authService.login(email, password)
+            .then((authData) => {
+                console.log('logged');
+                console.log(authData)
+            })
+
+        onLogin(email);
+
+        navigate('/dashboard');
+    }
+
     return (
-        <section id="login-page" class="login">
-            <form id="login-form" action="" method="">
+        <section id="login-page" className="login">
+            <form id="login-form" onSubmit={onLoginHandler} method="POST">
                 <fieldset>
                     <legend>Login Form</legend>
-                    <p class="field">
+                    <p className="field">
                         <label htmlFor="email">Email</label>
-                        <span class="input">
+                        <span className="input">
                             <input type="text" name="email" id="email" placeholder="Email" />
                         </span>
                     </p>
-                    <p class="field">
+                    <p className="field">
                         <label htmlFor="password">Password</label>
-                        <span class="input">
+                        <span className="input">
                             <input type="password" name="password" id="password" placeholder="Password" />
                         </span>
                     </p>
-                    <input class="button submit" type="submit" value="Login" />
+                    <input className="button submit" type="submit" value="Login" />
                 </fieldset>
             </form>
         </section>

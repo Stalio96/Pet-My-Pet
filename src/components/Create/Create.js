@@ -24,31 +24,31 @@ const Create = () => {
         })
     }
     return (
-        <section id="create-page" class="create">
+        <section id="create-page" className="create">
             <form id="create-form" onSubmit={onPetCreate} method="POST">
                 <fieldset>
                     <legend>Add new Pet</legend>
-                    <p class="field">
+                    <p className="field">
                         <label htmlFor="name">Name</label>
-                        <span class="input">
+                        <span className="input">
                             <input type="text" name="name" id="name" placeholder="Name" />
                         </span>
                     </p>
-                    <p class="field">
+                    <p className="field">
                         <label htmlFor="description">Description</label>
-                        <span class="input">
+                        <span className="input">
                             <textarea name="description" id="description" placeholder="Description"></textarea>
                         </span>
                     </p>
-                    <p class="field">
+                    <p className="field">
                         <label htmlFor="image">Image</label>
-                        <span class="input">
+                        <span className="input">
                             <input type="text" name="imageUrl" id="image" placeholder="Image" />
                         </span>
                     </p>
-                    <p class="field">
+                    <p className="field">
                         <label htmlFor="type">Type</label>
-                        <span class="input">
+                        <span className="input">
                             <select id="type" name="type">
                                 <option value="cat">Cat</option>
                                 <option value="dog">Dog</option>
@@ -58,7 +58,7 @@ const Create = () => {
                             </select>
                         </span>
                     </p>
-                    <input class="button submit" type="submit" value="Add Pet" />
+                    <input className="button submit" type="submit" value="Add Pet" />
                 </fieldset>
             </form>
         </section>

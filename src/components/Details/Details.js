@@ -14,24 +14,24 @@ const Details = () => {
     }, []);
 
     return (
-        <section id="details-page" class="details">
-            <div class="pet-information">
+        <section id="details-page" className="details">
+            <div className="pet-information">
                 <h3>Name: {pet.name}</h3>
-                <p class="type">Type: {pet.type}</p>
-                <p class="img"><img src={pet.imageUrl} /></p>
-                <div class="actions">
-                    <Link class="button" to={`/edit/${pet._id}`}>Edit</Link>
-                    <Link class="button" to={`/delete/${pet._id}`}>Delete</Link>
+                <p className="type">Type: {pet.type}</p>
+                <p className="img"><img src={pet.imageUrl} /></p>
+                <div className="actions">
+                    <Link className="button" to={`/edit/${pet._id}`}>Edit</Link>
+                    <Link className="button" to={`/delete/${pet._id}`}>Delete</Link>
 
-                    <Link class="button" to='#'>Like</Link>
+                    <Link className="button" to='#'>Like</Link>
 
-                    <div class="likes">
-                        <img class="hearts" src="/images/heart.png" />
+                    <div className="likes">
+                        <img className="hearts" src="/images/heart.png" />
                         <span id="total-likes">Likes: 0</span>
                     </div>
                 </div>
             </div>
-            <div class="pet-description">
+            <div className="pet-description">
                 <h3>Description:</h3>
                 <p>{pet.description}</p>
             </div>

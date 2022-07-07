@@ -8,18 +8,20 @@ const Dashboard = () => {
 
     useEffect(() => {
         petService.getAll()
-        .then(result => {
-            console.log(result)
-            setPets(result);
-        });
+            .then(result => {
+                setPets(result);
+            });
     }, [])
     return (
-        <section id="dashboard-page" class="dashboard">
+        <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>
-            <ul class="other-pets-list">
-                {pets.map(x => <DashboardCard key={x._id} pet={x} />)}
-            </ul>
-            <p class="no-pets">No pets in database!</p>
+
+            {pets.length > 0
+                ? <ul className="other-pets-list">
+                    {pets.map(x => <DashboardCard key={x._id} pet={x} />)}
+                </ul>
+                : <p className="no-pets">No pets in database!</p>
+            }
         </section>
     );
 }
