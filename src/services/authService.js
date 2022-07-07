@@ -10,14 +10,14 @@ export async function login(email, password) {
     });
 
     let result = await response.json();
-    
+
     if(response.ok){
         localStorage.setItem('user', email);
     
         return result;
+    }else {
+        throw result.message;
     }
-
-    throw response.js
 }
 
 export async function logout() {
