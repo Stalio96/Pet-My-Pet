@@ -10,6 +10,9 @@ const Dashboard = () => {
         petService.getAll()
             .then(result => {
                 setPets(result);
+            })
+            .catch(err => {
+                console.log(err);
             });
     }, [])
     return (

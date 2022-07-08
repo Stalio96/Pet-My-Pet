@@ -1,9 +1,9 @@
+import { request } from '../services/requester';
+
 const baseUrl = 'http://localhost:3030';
 
 export async function getAll() {
-    let response = await fetch(`${baseUrl}/data/pets?sortBy=_createdOn%20desc`);
-
-    let result = await response.json();
+    let result = await request(`${baseUrl}/data/pets?sortBy=_createdOn%20desc`);
 
     return result;
 }
@@ -12,10 +12,10 @@ export async function create(petData, token) {
     let response = await fetch(`${baseUrl}/data/pets`, {
         method: 'post',
         headers: {
-        'content-type': 'application/json',
-        'X-Authorization': token
+            'content-type': 'application/json',
+            'X-Authorization': token
         },
-        body: JSON.stringify({...petData, likes: []})
+        body: JSON.stringify({ ...petData, likes: [] })
     });
 
     let result = await response.json();
