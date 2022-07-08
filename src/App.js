@@ -1,4 +1,6 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Route, Routes, Link } from "react-router-dom";
 
 import { AuthProvider } from './contexts/AuthContext';
@@ -12,8 +14,6 @@ import Login from './components/Login/Login';
 import MyPet from './components/MyPet/MyPet';
 import Register from './components/Register/Register';
 import Logout from './components/Logout/Logout';
-
-
 
 function App() {
 
