@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes, Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
-// import * as authService from './services/authService'
+import useLocalStorage from './hooks/useLocalStorageHook';
 import { AuthContext } from './contexts/AuthContext';
 
 import Header from './components/Header/Header';
@@ -16,20 +16,11 @@ import Register from './components/Register/Register';
 import Logout from './components/Logout/Logout';
 
 function App() {
-  const [user, setUser] = useState({
+  const [user, setUser] = useLocalStorage('user', {
     accessToken: '',
     email: '',
     _id: ''
   });
-
-  // useEffect(() => {
-  //   let user = authService.getUser();
-
-  //   setUserInfo({
-  //     isAuthenticated: Boolean(user),
-  //     user
-  //   })
-  // }, [])
 
   const login = (authData) => {
     setUser(authData);

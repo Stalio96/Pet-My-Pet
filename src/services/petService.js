@@ -15,7 +15,7 @@ export async function create(petData, token) {
         'content-type': 'application/json',
         'X-Authorization': token
         },
-        body: JSON.stringify(petData)
+        body: JSON.stringify({...petData, likes: []})
     });
 
     let result = await response.json();
@@ -28,4 +28,15 @@ export async function getOne(id) {
     let result = await response.json();
 
     return result;
+}
+
+export async function destroy(id, token) {
+    let response = await fetch(`${baseUrl}/data/pets/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': token
+        }
+    });
+
+    return response.json();
 }
