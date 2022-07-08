@@ -15,23 +15,25 @@ import MyPet from './components/MyPet/MyPet';
 import Register from './components/Register/Register';
 import Logout from './components/Logout/Logout';
 
+const initialAuthState = {
+  accessToken: '',
+  email: '',
+  _id: ''
+};
+
 function App() {
-  const [user, setUser] = useLocalStorage('user', {
-    accessToken: '',
-    email: '',
-    _id: ''
-  });
+  const [user, setUser] = useLocalStorage('user', initialAuthState);
 
   const login = (authData) => {
     setUser(authData);
   }
 
-  const onLogout = (email) => {
-
+  const logout = () => {
+    setUser(initialAuthState);
   }
 
   return (
-    <AuthContext.Provider value={{user, login}}>
+    <AuthContext.Provider value={{user, login, logout}}>
       <div className="App">
         <Header />
 

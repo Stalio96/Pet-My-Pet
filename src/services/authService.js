@@ -20,8 +20,13 @@ export async function login(email, password) {
     }
 }
 
-export async function logout() {
-    const respone = await fetch(`${baseUrl}/users/logout`);
+export async function logout(token) {
+    const respone = await fetch(`${baseUrl}/users/logout`, {
+        method: 'GET',
+        headers: {
+            'X-Authorization': token
+        }
+    });
 }
 
 export async function register(email, password) {
