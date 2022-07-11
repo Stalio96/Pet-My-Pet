@@ -1,7 +1,9 @@
-import * as petService from '../../services/petService';
 import { useParams } from 'react-router-dom';
-import usePetState from '../../hooks/usePetSatete';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+
+import * as petService from '../../services/petService';
+import usePetState from '../../hooks/usePetSatete';
 
 import { Alert } from 'react-bootstrap';
 
@@ -14,6 +16,7 @@ const types = [
 ];
 
 const Edit = () => {
+    const navigate = useNavigate();
     const { petId } = useParams();
     const [errors, setErrors] = useState({ name: false });
     const [pet, setPet] = usePetState(petId);
@@ -21,7 +24,14 @@ const Edit = () => {
     const editSubmitHandler = (e) => {
         e.preventDefault();
 
+        let petData = Object.fromEntries(new FormData(e.currentTarget));
 
+        console.log(petData);
+
+        petService.update(petId, petData)
+        .then(() => {
+            navigate(`/details/${petId}`)
+        })
     }
 
     const nameChangeHandler = (e) => {
@@ -34,6 +44,10 @@ const Edit = () => {
         } else {
             setErrors(state => ({ ...state, name: false }))
         }
+    }
+
+    const typeSet = (e) => {
+        setPet(s => ({...s, type: e.target.value}));
     }
 
     return (
@@ -64,7 +78,7 @@ const Edit = () => {
                     <p className="field">
                         <label htmlFor="type">Type</label>
                         <span className="input">
-                            <select id="type" name="type" value={pet.type}>
+                            <select id="type" name="type" value={pet.type} onChange={typeSet}>
                                 {types.map(x => <option key={x.value} value={x.value}>{x.text}</option>)}
                             </select>
                         </span>

@@ -1,9 +1,9 @@
-import { request } from '../services/requester';
+import * as request from '../services/requester';
 
 const baseUrl = 'http://localhost:3030';
 
 export async function getAll() {
-    let result = await request(`${baseUrl}/data/pets?sortBy=_createdOn%20desc`);
+    let result = await request.get(`${baseUrl}/data/pets?sortBy=_createdOn%20desc`);
 
     return result;
 }
@@ -19,6 +19,14 @@ export async function create(petData, token) {
     });
 
     let result = await response.json();
+    return result;
+}
+
+export async function update(petId, petData) {
+    let url = `${baseUrl}/data/pets/${petId}`;
+    
+    let result = await request.put(url, petData);
+
     return result;
 }
 

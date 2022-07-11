@@ -1,14 +1,47 @@
-export const request = (url) => {
+export const request = async (method, url, data) => {
+    let result = null;
 
-    return fetch(url).then(responseHandler);
+    if (method == 'GET') {
+        result = fetch(url)
+    } else {
+        result = fetch(url, {
+            method,
+            headers: {
+                'content-type': 'application/json',
+                'X-Authorization': getToken()
+            },
+            body: JSON.stringify(data)
+        })
+    }
+
+    return result.then(responseHandler);
 };
 
 async function responseHandler(res) {
     let jsonData = await res.json();
 
-    if(!res.ok){
+    if (!res.ok) {
         throw Object.values(jsonData);
-    }else {
+    } else {
         return jsonData;
     }
 }
+
+function getToken() {
+    try {
+        let userItem = localStorage.getItem('user')
+
+        if(!userItem){
+            throw {message: 'You must be authenticated'}
+        }
+
+        let user = JSON.parse(userItem);
+
+        return user.accessToken;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const get = request.bind(null, 'GET');
+export const put = request.bind(null, 'PUT');
