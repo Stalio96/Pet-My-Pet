@@ -1,25 +1,20 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
+import { Button } from 'react-bootstrap';
+
+import usePetState from "../../hooks/usePetSatete";
 import { useAuthContext } from '../../contexts/AuthContext';
-
 import * as petService from '../../services/petService';
-
 import Confirm from '../Common/Confirm/Confirm';
+
 
 const Details = () => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
-    const [pet, setPet] = useState({});
-    const [showDelete, setShowDelete] = useState(false);
     const { petId } = useParams();
-
-    useEffect(() => {
-        petService.getOne(petId)
-            .then(result => {
-                setPet(result);
-            })
-    }, []);
+    const [pet, setPet] = usePetState(petId);
+    const [showDelete, setShowDelete] = useState(false);
 
     const onDelete = (e) => {
         e.preventDefault();
@@ -34,6 +29,7 @@ const Details = () => {
 
     const onDeleteClick = (e) => {
         e.preventDefault();
+
         setShowDelete(true);
     }
 
@@ -41,9 +37,31 @@ const Details = () => {
         <>
             <Link className="button" to={`/edit/${pet._id}`}>Edit</Link>
             <Link className="button" to={`/delete/${pet._id}`} onClick={onDeleteClick} >Delete</Link>
-        </>);
+        </>
+    );
 
-    const guestBtn = (<Link className="button" to='#'>Like</Link>);
+    const likeButton = () => {
+        if(pet.likes?.includes(user._id)){
+            console.log('user already liked')
+            return;
+        }
+
+        console.log(pet)
+
+        const likes = [...pet.likes, user._id];
+        const likedPet = {...pet, likes};
+
+        petService.like(petId, likedPet, user.accessToken)
+            .then((resData) => {
+                console.log(resData);
+                setPet(state => ({
+                    ...state,
+                    likes
+                }))
+            })
+    }
+
+    const guestBtn = (<Button className="button" onClick={likeButton}>Like</Button>);
 
     return (
         <>

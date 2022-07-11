@@ -22,20 +22,33 @@ export async function create(petData, token) {
     return result;
 }
 
-export async function getOne(id) {
-    let response = await fetch(`${baseUrl}/data/pets/${id}`);
+export async function getOne(petId) {
+    let response = await fetch(`${baseUrl}/data/pets/${petId}`);
 
     let result = await response.json();
 
     return result;
 }
 
-export async function destroy(id, token) {
-    let response = await fetch(`${baseUrl}/data/pets/${id}`, {
+export async function destroy(petId, token) {
+    let response = await fetch(`${baseUrl}/data/pets/${petId}`, {
         method: 'DELETE',
         headers: {
             'X-Authorization': token
         }
+    });
+
+    return response.json();
+}
+
+export async function like(petId, pet, token) {
+    const response = await fetch(`${baseUrl}/data/likes/${petId}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': token
+        },
+        body: JSON.stringify(pet)
     });
 
     return response.json();
