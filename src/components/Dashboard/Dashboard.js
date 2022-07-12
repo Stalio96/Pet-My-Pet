@@ -14,7 +14,8 @@ const Dashboard = () => {
             .catch(err => {
                 console.log(err);
             });
-    }, [])
+    }, []);
+
     return (
         <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>

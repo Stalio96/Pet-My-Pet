@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, Link } from "react-router-dom";
 
 import { AuthProvider } from './contexts/AuthContext';
+import { NotificationProvider } from './contexts/NotificationContext';
 
 import ErrorBoundary from './components/Common/ErrorBoundary';
 
@@ -16,32 +17,37 @@ import Login from './components/Login/Login';
 import MyPet from './components/MyPet/MyPet';
 import Register from './components/Register/Register';
 import Logout from './components/Logout/Logout';
+import Notification from './components/Common/Notification';
 
 function App() {
 
   return (
     <ErrorBoundary>
       <AuthProvider>
-        <div className="App">
-          <Header />
+        <NotificationProvider>
+          <div className="App">
+            <Header />
 
-          <main id="site-content">
-            <Routes>
-              <Route path='/dashboard' element={<Dashboard />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/logout' element={<Logout />} />
-              <Route path='/register' element={<Register />} />
-              <Route path='/details/:petId' element={<Details />} />
-              <Route path='/create' element={<Create />} />
-              <Route path='/edit/:petId' element={<Edit />} />
-              <Route path='/my-pet/:userId' element={<MyPet />} />
-            </Routes>
-          </main>
+            <Notification />
 
-          <footer id="site-footer">
-            <p>@PetMyPet</p>
-          </footer>
-        </div>
+            <main id="site-content">
+              <Routes>
+                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/logout' element={<Logout />} />
+                <Route path='/register' element={<Register />} />
+                <Route path='/details/:petId' element={<Details />} />
+                <Route path='/create' element={<Create />} />
+                <Route path='/edit/:petId' element={<Edit />} />
+                <Route path='/my-pets' element={<MyPet />} />
+              </Routes>
+            </main>
+
+            <footer id="site-footer">
+              <p>@PetMyPet</p>
+            </footer>
+          </div>
+        </NotificationProvider>
       </AuthProvider>
     </ErrorBoundary>
   );

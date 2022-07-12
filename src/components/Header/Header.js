@@ -14,13 +14,13 @@ const Header = () => {
                     {user.email
                         ? <div id="user">
                             <span>Welcome, {user.email}</span>
-                            <Link className="button" to={'/my-pet'}>My Pets</Link>
-                            <Link className="button" to={'/create'}>Add Pet</Link>
-                            <Link className="button" to={'/logout'}>Logout</Link>
+                            <Link className="button" to='/my-pets'>My Pets</Link>
+                            <Link className="button" to='/create'>Add Pet</Link>
+                            <Link className="button" to='/logout'>Logout</Link>
                         </div>
                         : <div id="guest">
-                            <Link className="button" to={'/login'}>Login</Link>
-                            <Link className="button" to={'/register'}>Register</Link>
+                            <Link className="button" to='/login'>Login</Link>
+                            <Link className="button" to='/register'>Register</Link>
                         </div>
                     }
                 </section>

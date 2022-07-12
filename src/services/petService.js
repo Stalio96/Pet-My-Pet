@@ -8,6 +8,11 @@ export async function getAll() {
     return result;
 }
 
+export async function getMyPets(userId) {
+    let query = encodeURIComponent(`_ownerId="${userId}"`)
+    return request.get(`${baseUrl}/data/pets?where=${query}`)
+}
+
 export async function create(petData, token) {
     let response = await fetch(`${baseUrl}/data/pets`, {
         method: 'post',
