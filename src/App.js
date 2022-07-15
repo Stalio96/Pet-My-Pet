@@ -7,6 +7,8 @@ import { AuthProvider } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
 
 import ErrorBoundary from './components/Common/ErrorBoundary';
+import PrivateRoute from './components/Common/PrivateRoute';
+import GardedRoute from './components/Common/GardedRoute';
 
 import Header from './components/Header/Header';
 import Create from './components/Create/Create';
@@ -37,9 +39,12 @@ function App() {
                 <Route path='/logout' element={<Logout />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/details/:petId' element={<Details />} />
-                <Route path='/create' element={<Create />} />
-                <Route path='/edit/:petId' element={<Edit />} />
-                <Route path='/my-pets' element={<MyPet />} />
+                <Route path='/my-pets' element={<PrivateRoute><MyPet /></PrivateRoute>} />
+
+                <Route element={<GardedRoute />}>
+                  <Route path='/edit/:petId' element={<Edit />} />
+                  <Route path='/create' element={<Create />} />
+                </Route>
               </Routes>
             </main>
 
